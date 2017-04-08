@@ -16,7 +16,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import com.home.ls.spring.config.SpringJavaConfiguration;
 
 /**
- *
+ * Manage Jetty server, the project start point
+ * 
  * @author hchen
  */
 public class JettyServerMain {

@@ -9,12 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import com.home.ls.service.IpResolverService;
-import com.home.ls.service.IpResolverServiceImpl;
-import com.home.ls.service.LocationManager;
-import com.home.ls.service.LocationManagerImpl;
+import com.home.ls.service.IpLocationResolveService;
+import com.home.ls.service.IpLocationResolveServiceImpl;
+import com.home.ls.service.LocationDao;
+import com.home.ls.service.LocationDaoRemoteImpl;
 
 /**
+ *Java based Spring config
  *
  * @author hchen
  */
@@ -24,13 +25,13 @@ public class SpringJavaConfiguration {
     
     
     @Bean
-    public LocationManager LocationManager() {
-        return new LocationManagerImpl();
+    public LocationDao LocationManager() {
+        return new LocationDaoRemoteImpl();
     }
     
     @Bean
-    public IpResolverService ipResolverService() {
-        return new IpResolverServiceImpl(LocationManager());
+    public IpLocationResolveService ipResolverService() {
+        return new IpLocationResolveServiceImpl(LocationManager());
     }
 
     

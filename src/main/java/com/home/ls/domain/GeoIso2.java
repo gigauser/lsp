@@ -1,5 +1,11 @@
 package com.home.ls.domain;
 
+/**
+ * Geo location data with Iso2 code
+ * 
+ * @author hchen
+ */
+
 public class GeoIso2 {
 	private String countryIso2;
 	private String stateAbbr;

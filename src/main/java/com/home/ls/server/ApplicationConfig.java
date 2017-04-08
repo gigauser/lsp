@@ -9,7 +9,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
 
-import com.home.ls.web.rest.GreetingResource;
+import com.home.ls.web.rest.IpLocationResource;
 
 /**
  *
@@ -18,7 +18,7 @@ import com.home.ls.web.rest.GreetingResource;
 public class ApplicationConfig extends ResourceConfig {
     
     public ApplicationConfig() {
-        register(GreetingResource.class);
+        register(IpLocationResource.class);
         register(JacksonFeature.class);
         property(ServerProperties.METAINF_SERVICES_LOOKUP_DISABLE, true);
     }

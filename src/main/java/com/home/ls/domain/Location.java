@@ -1,20 +1,28 @@
 package com.home.ls.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-
 /**
-*
-* @author hchen
-*/
-@JsonIgnoreProperties
-public class Location {
+ * Isocode data as well as ip and zipcode
+ * 
+ * @author hchen
+ */
+
+public class Location extends IsoCode {
 	private String ip;
-	private String zipcode;
-	private String isoCode2;
-	private String isoCode3;
+    private String zipcode;
 	
-	public Location(String ip){
+	public Location(){}
+	
+	public Location(IsoCode isoCode, String ip, String zipcode ){
+		super(isoCode.getName(), isoCode.getAlpha2_code(), isoCode.getAlpha3_code());
+		this.ip=ip;
+		this.zipcode = zipcode;
+	}
+	
+	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
 		this.ip = ip;
 	}
 	
@@ -24,25 +32,4 @@ public class Location {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public String getIsoCode2() {
-		return isoCode2;
-	}
-	public void setIsoCode2(String isoCode2) {
-		this.isoCode2 = isoCode2;
-	}
-	public String getIsoCode3() {
-		return isoCode3;
-	}
-	public void setIsoCode3(String isoCode3) {
-		this.isoCode3 = isoCode3;
-	}
-	
-	
-	
 }

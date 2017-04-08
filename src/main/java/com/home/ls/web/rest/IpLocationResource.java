@@ -13,31 +13,26 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.home.ls.domain.GeoIso2;
 import com.home.ls.domain.Location;
-import com.home.ls.domain.ResposeGeoIso2;
-import com.home.ls.domain.RestRespose;
-import com.home.ls.service.IpResolverService;
+import com.home.ls.service.IpLocationResolveService;
 
 /**
+ *Restful service entry point for the Ip based Location search
  *
  * @author hchen
  */
-@Path("greeting")
-public class GreetingResource {
+@Path("location")
+public class IpLocationResource {
 
     @Autowired
-    private IpResolverService ipResolverService;
+    private IpLocationResolveService ipResolverService;
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public RestRespose getGreeting(@QueryParam("name") String name) {
+    public Location getGreeting(@QueryParam("ip") String ip) {
         
-        Location loc = ipResolverService.getLocationByIp(name);
-        
-        ResposeGeoIso2 lo= new ResposeGeoIso2(new  GeoIso2("cois2", "sds", "sddd"));
-        
+    	Location location = ipResolverService.getLocationByIp(ip);
         		
-        return new RestRespose(lo);
+        return location;
     }
 }
