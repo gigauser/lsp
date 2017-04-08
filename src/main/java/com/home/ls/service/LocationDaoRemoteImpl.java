@@ -18,28 +18,28 @@ public class LocationDaoRemoteImpl implements LocationDao{
 	public LocationDaoRemoteImpl(){};
 	
 
-
 	public GeoIso2 getGeoIso2ByIp(String ip) {
 		String url = String.format("http://geo.groupkt.com/ip/%s/json", ip);
-	
-		// Call service
-        RestTemplate restTemplate = new RestTemplate();
 		
-        GeoIso2RestRespose result = restTemplate.getForObject(url.toString(), GeoIso2RestRespose.class);
+		GeoIso2RestRespose result = callRemoteRest(url, GeoIso2RestRespose.class);
 		
 		return result.getGeoIso2Response().getGeoIso2();
 	}
 
-	public IsoCode getIsoCodeByIso2code(String iso2code) {
-		String url = String.format("http://services.groupkt.com/country/get/iso2code/%s", iso2code);
-	
+	private <T> T callRemoteRest(String url, Class<T> responseType) {	
 		// Call service
         RestTemplate restTemplate = new RestTemplate();
 		
-        IsoCodeRestRespose result = restTemplate.getForObject(url, IsoCodeRestRespose.class);
+        T result = restTemplate.getForObject(url, responseType);
+		return result;
+	}
+
+	public IsoCode getIsoCodeByIso2code(String iso2code) {
+		String url = String.format("http://services.groupkt.com/country/get/iso2code/%s", iso2code);
+		
+        IsoCodeRestRespose result = callRemoteRest(url, IsoCodeRestRespose.class);
 		
 		return result.getResponseIsoCode().getIsoCode();
 	}
-	
 	
 }

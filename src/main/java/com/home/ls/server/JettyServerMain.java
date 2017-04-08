@@ -21,34 +21,51 @@ import com.home.ls.spring.config.SpringJavaConfiguration;
  * @author hchen
  */
 public class JettyServerMain {
-	
-	
 
-    public static void main(String[] args) throws Exception {
-        ApplicationConfig applicationConfig = new ApplicationConfig();
+	private Server server;
 
-        ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(applicationConfig));
+	private static JettyServerMain instance = new JettyServerMain();
 
-        ServletContextHandler context = new ServletContextHandler();
+	public static JettyServerMain get() {
+		return instance;
+	}
 
-        context.setContextPath("/");
-        context.addServlet(jerseyServlet, "/rest/*");
-        
+	protected JettyServerMain() {}
 
-        context.addEventListener(new ContextLoaderListener());
-        context.addEventListener(new RequestContextListener());
+	public void startJettyWebApp(int httpPort, String webPath) throws Exception {
+		ApplicationConfig applicationConfig = new ApplicationConfig();
+		ServletHolder jerseyServlet = new ServletHolder(new ServletContainer(applicationConfig));
 
-        context.setInitParameter("contextClass", AnnotationConfigWebApplicationContext.class.getName());
-        context.setInitParameter("contextConfigLocation", SpringJavaConfiguration.class.getName());
+		ServletContextHandler context = new ServletContextHandler();
 
-        Server server = new Server(8080);
-        server.setHandler(context);
+		context.setContextPath("/");
+		context.addServlet(jerseyServlet, webPath);
 
-        try {
-            server.start();
-            server.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
+		context.addEventListener(new ContextLoaderListener());
+		context.addEventListener(new RequestContextListener());
+
+		context.setInitParameter("contextClass", AnnotationConfigWebApplicationContext.class.getName());
+		context.setInitParameter("contextConfigLocation", SpringJavaConfiguration.class.getName());
+
+		Server server = new Server(httpPort);
+		server.setHandler(context);
+
+		server.start();
+
+	}
+
+	public void stopJettyWebApp() throws Exception {
+		server.stop();
+	}
+
+	//	  public static void main_orig(String[] args) throws Exception {
+	//	//       URL log4jUrl = Thread.currentThread().getContextClassLoader().getResource("cms_log4j.xml");
+	//	//       DOMConfigurator.configure(log4jUrl);
+	//	  }
+
+	public static void main(String[] args) throws Exception {
+
+		JettyServerMain.get().startJettyWebApp(8080, "/rest/*");
+	}
 }
