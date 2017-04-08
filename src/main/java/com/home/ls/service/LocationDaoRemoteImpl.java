@@ -12,14 +12,15 @@ import com.home.ls.domain.IsoCodeRestRespose;
  *
  * @author hchen
  */
+
 public class LocationDaoRemoteImpl implements LocationDao{
 	
 	public LocationDaoRemoteImpl(){};
+	
 
 
 	public GeoIso2 getGeoIso2ByIp(String ip) {
-		StringBuilder url = new StringBuilder().
-                append("http://geo.groupkt.com/ip/172.217.3.14/json");
+		String url = String.format("http://geo.groupkt.com/ip/%s/json", ip);
 	
 		// Call service
         RestTemplate restTemplate = new RestTemplate();
@@ -30,13 +31,12 @@ public class LocationDaoRemoteImpl implements LocationDao{
 	}
 
 	public IsoCode getIsoCodeByIso2code(String iso2code) {
-		StringBuilder url = new StringBuilder().
-                append("http://services.groupkt.com/country/get/iso2code/US");
+		String url = String.format("http://services.groupkt.com/country/get/iso2code/%s", iso2code);
 	
 		// Call service
         RestTemplate restTemplate = new RestTemplate();
 		
-        IsoCodeRestRespose result = restTemplate.getForObject(url.toString(), IsoCodeRestRespose.class);
+        IsoCodeRestRespose result = restTemplate.getForObject(url, IsoCodeRestRespose.class);
 		
 		return result.getResponseIsoCode().getIsoCode();
 	}

@@ -7,7 +7,6 @@ import com.home.ls.domain.Location;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 
-//import org.springframework.web.client.RestTemplate;
 
 /**
  * Impl layer for IP based location search service
@@ -16,7 +15,7 @@ import com.home.ls.domain.Location;
  */
 public class IpLocationResolveServiceImpl implements IpLocationResolveService{
 
-//	private static final Logger log = LoggerFactory.getLogger(IpResolverServiceImpl.class);
+//	private static final Logger log = LoggerFactory.getLogger(IpLocationResolveServiceImpl.class);
 	
 	private LocationDao locationManager;
 	
@@ -25,7 +24,7 @@ public class IpLocationResolveServiceImpl implements IpLocationResolveService{
 	}
 	
 	public Location getLocationByIp(String ip) {
-		System.out.println(ip);
+//		log.info(ip);
 		
 		GeoIso2 geoIso2= locationManager.getGeoIso2ByIp(ip);
 		
