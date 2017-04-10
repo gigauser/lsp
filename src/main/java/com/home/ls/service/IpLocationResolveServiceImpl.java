@@ -4,8 +4,8 @@ import com.home.ls.domain.GeoIso2;
 import com.home.ls.domain.IsoCode;
 import com.home.ls.domain.Location;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -15,7 +15,7 @@ import com.home.ls.domain.Location;
  */
 public class IpLocationResolveServiceImpl implements IpLocationResolveService{
 
-//	private static final Logger log = LoggerFactory.getLogger(IpLocationResolveServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(IpLocationResolveServiceImpl.class);
 	
 	private LocationDao locationManager;
 	

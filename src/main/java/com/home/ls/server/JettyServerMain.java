@@ -5,6 +5,9 @@
  */
 package com.home.ls.server;
 
+import java.net.URL;
+
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -59,13 +62,11 @@ public class JettyServerMain {
 		server.stop();
 	}
 
-	//	  public static void main_orig(String[] args) throws Exception {
-	//	//       URL log4jUrl = Thread.currentThread().getContextClassLoader().getResource("cms_log4j.xml");
-	//	//       DOMConfigurator.configure(log4jUrl);
-	//	  }
 
 	public static void main(String[] args) throws Exception {
-
+		URL log4jUrl = Thread.currentThread().getContextClassLoader().getResource("log4j-cms.xml");
+		DOMConfigurator.configure(log4jUrl);
+		
 		JettyServerMain.get().startJettyWebApp(8080, "/rest/*");
 	}
 }

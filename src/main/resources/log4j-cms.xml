@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" debug="true">
+
+    <!-- Enable console appender for development only -->
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%m%n"/>
+            <!--param name="ConversionPattern" value="[%t] %-5p %c %x - %m%n"/-->
+        </layout>
+    </appender>
+
+    <!-- <appender name="TEXT" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="${lsp.work.dir}/logs/lsp.log"/>
+        <param name="Append" value="true"/>
+        <param name="ImmediateFlush" value="true"/>
+        <param name="MaxFileSize" value="15MB"/>
+        <param name="MaxBackupIndex" value="10"/>
+        
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-4r [%t] %-5p %c %x - %m%n"/>
+            <param name="ConversionPattern" value="%d %-5p [%t] %c{1} - %m%n"/>
+            param name="ConversionPattern" value="%m%n"/
+        </layout>
+    </appender> -->
+
+
+    <appender name="ASYNC" class="org.apache.log4j.AsyncAppender">
+        <!-- Enable console appender for development only -->
+        <appender-ref ref="STDOUT"/>
+        <!-- <appender-ref ref="TEXT"/> -->
+    </appender>
+
+
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="ASYNC"/>
+    </root>
+
+</log4j:configuration>
